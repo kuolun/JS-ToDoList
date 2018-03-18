@@ -13,6 +13,9 @@ loadEventListeners();
 function loadEventListeners(){
     //add task event
     form.addEventListener('submit', addTask);
+
+    //add remove event (若click在ul內的element上的event會bubble up)
+    taskList.addEventListener('click',removeTask);
 }
 
 //add task
@@ -45,4 +48,13 @@ function addTask(e){
     taskInput.value = '';
 
     e.preventDefault();//避免form送出
+}
+
+//remove task
+function removeTask(e){
+    if(e.target.classList.contains('fa-remove')){
+        if(confirm('Are you sure')){
+            e.target.parentElement.parentElement.remove();
+        }
+    }
 }
